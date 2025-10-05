@@ -1,0 +1,9 @@
+.aboutContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.aboutContainer p {
+    max-width: 48rem;
+}

@@ -1,0 +1,15 @@
+.headerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: absolute;
+}
+
+@media (max-width: 600px) {
+    .headerContainer {
+        position: static;
+        display: none;
+    }
+}
