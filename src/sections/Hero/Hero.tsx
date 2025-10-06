@@ -18,7 +18,7 @@ const Hero = () => {
         </div>
       </div>
       <div className={styles.photoContainer}>
-        <img src="" alt="" />
+        <img src="../public/emersonrecortado2.png" alt="" />
       </div>
     </section>
   );

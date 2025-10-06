@@ -39,15 +39,58 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* enable 3D space so child can feel depth */
+  perspective: 1200px;
+  position: relative;
+  /* keep container size to image for nicer shadow placement */
+  width: max-content;
+  padding: 0.5rem;
+}
+
+.photoContainer::before {
+  /* subtle blurred halo/shadow to give depth behind the photo */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(2,6,23,0.12) 0%, rgba(2,6,23,0.06) 40%, transparent 60%);
+  filter: blur(14px);
+  transform: translateZ(-1px) scale(0.98);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .photoContainer img {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
   box-sizing: border-box;
-  width: 250px;
-  height: 250px;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
+  /* cover usually looks better for portraits */
   object-fit: cover;
-  border: 2px solid var(--color-accent);
+  transition: transform 350ms cubic-bezier(.2,.9,.2,1), box-shadow 350ms;
+  box-shadow: 0 10px 25px rgba(2,6,23,0.18), 0 4px 10px rgba(2,6,23,0.12);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* border: 2px solid var(--color-accent); */
+}
+
+.photoContainer img:hover {
+  transform: translateY(-8px) translateZ(40px) rotateX(3deg);
+  box-shadow: 0 22px 45px rgba(2,6,23,0.22), 0 8px 20px rgba(2,6,23,0.14);
+}
+
+@media (max-width: 600px) {
+  .photoContainer img {
+    width: 220px;
+    height: 220px;
+    box-shadow: 0 8px 18px rgba(2,6,23,0.14);
+  }
+  .photoContainer::before {
+    filter: blur(10px);
+  }
 }
 
 .buttonsContainer {
